@@ -1,0 +1,1 @@
+This is a Pokemon guessing game which utilizes the PokeAPI. App will generate a random pokemon from 1-151 and user will be given four choices. If correct, the chosen answer will be marked green, the pokemon will be shown and the app will refresh shortly after. If incorrect, the answer will be marked in red and the user can continue to guess until correct.
