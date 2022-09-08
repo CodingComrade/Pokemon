@@ -7,6 +7,9 @@ const wrong3 = getPokemon()
 const choices = [correctAnswer - 1, wrong1, wrong2, wrong3]
 const test = randomAnswers(choices)
 
+if(!localStorage.getItem('streak')) {
+  localStorage.setItem('streak', 0)
+}
 
 
 function randomAnswers(choices) {
@@ -26,7 +29,6 @@ function playAudio() {
 function getFetch() {
 
   function refresh() {
-  //console.log(playerChoice, playerChoice2, playerChoice3, playerChoice4)
   document.querySelector('.pokemonSprite').style.filter = 'brightness(1)'
   setTimeout(location.reload.bind(location), 2000)
 }
@@ -54,39 +56,64 @@ function getFetch() {
         document.querySelector('#choice3').addEventListener('click', thirdTry)
         document.querySelector('#choice4').addEventListener('click', fourthTry)
         
+        function pokeStreak() {
+          let streak = Number(localStorage.getItem('streak'))
+          streak = streak + 1
+          localStorage.setItem('streak', streak)
+          console.log(localStorage.getItem('streak'))
+
+          if (streak === 151) {
+            console.log('you get a badge!')
+          }
+        }
+
+        function streakBroken() {
+          localStorage.setItem('streak', 0)
+          console.log(localStorage.getItem('streak'))
+        }
+
+
         function firstTry() {
           if (playerChoice === data.results[correctAnswer - 1].name) {
             document.querySelector('#choice1').style.color = 'green';
-           refresh()
+            pokeStreak()
+            refresh()
           } else {
             document.querySelector('#choice1').style.color = 'red';
+            streakBroken()
           }
         }
 
         function secondTry() {
           if (playerChoice2 === data.results[correctAnswer - 1].name) {
             document.querySelector('#choice2').style.color = 'green';
+            pokeStreak()
            refresh()
           } else {
             document.querySelector('#choice2').style.color = 'red';
+            streakBroken()
           }
         }
 
         function thirdTry() {
           if (playerChoice3 === data.results[correctAnswer - 1].name) {
             document.querySelector('#choice3').style.color = 'green';
+            pokeStreak()
            refresh()
           } else {
             document.querySelector('#choice3').style.color = 'red';
+            streakBroken()
           }
         }
 
         function fourthTry() {
           if (playerChoice4 === data.results[correctAnswer - 1].name) {
             document.querySelector('#choice4').style.color = 'green';
+            pokeStreak()
            refresh()
           } else {
             document.querySelector('#choice4').style.color = 'red';
+            streakBroken()
           }
         }
         
